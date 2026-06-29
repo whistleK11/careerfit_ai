@@ -1,3 +1,3 @@
 # careerfit_ai
 
-i want some new desktop
+Let's make some new version
