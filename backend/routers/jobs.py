@@ -107,7 +107,6 @@ def get_jobs():
     취업 공고 목록을 반환하는 엔드포인트.
     현재는 목업 데이터를 반환하며, 3일차에 실제 데이터로 교체한다.
     """
-
     return {
         "count": len(MOCK_JOBS),
         "jobs": MOCK_JOBS
@@ -120,11 +119,9 @@ def get_job_by_id(job_id: int):
     """
     특정 공고의 상세 정보를 반환한다.
     """
-
     for job in MOCK_JOBS:
         if job["id"] == job_id:
             return job
-
     # 찾지 못한 경우
     from fastapi import HTTPException
     raise HTTPException(status_code=404, detail=f"공고 ID {job_id}를 찾을 수 없습니다.")
