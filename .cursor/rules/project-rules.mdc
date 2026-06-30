@@ -1,7 +1,7 @@
 ---
 description: CareerFit AI 프로젝트 전체 개발 규칙
 globs:
-alwaysApply: ture
+alwaysApply: true
 ---
 
 
