@@ -23,7 +23,7 @@ dist/
 Thumbs.db
 
 # Continue local config - may contain API keys
-.continue/agents/config.yaml
-.continue/agents/*.yaml
-.continue/agents/*.json
+config.yaml
+*.yaml
+*.json
 
