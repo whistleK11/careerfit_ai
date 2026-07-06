@@ -5,6 +5,7 @@ import pandas as pd
 import sqlite3
 import json
 import os
+from datetime import date
 
 
 
@@ -229,12 +230,17 @@ def convert_to_rag_documents(df: pd.DataFrame) -> list:
             f"업무 내용: {row.get('description', '정보 없음')}"
         )
         # metadata: 검색 결과를 필터링하거나 출처를 표시할 때 사용합니다
+        deadline = str(row.get("deadline", ""))
+        company = str(row.get("company", ""))
         metadata = {
             "id": str(row.get("id", "")),
-            "company": str(row.get("company", "")),
+            "company": company,
             "title": str(row.get("title", "")),
             "job_type": str(row.get("job_type", "")),
-            "deadline": str(row.get("deadline", "")),
+            "deadline": deadline,
+            "deadline_month": deadline[5:7] if len(deadline) >= 7 and deadline[4] == "-" else "",
+            "is_startup": "true" if "스타트업" in company else "false",
+            "saved_date": date.today().isoformat(),
             "source": "jobs.csv"
         }
         documents.append({
@@ -277,7 +283,7 @@ if __name__ == "__main__":
     # 7. SQLite에서 조회
     query_sqlite(DB_PATH)
     # 8. RAG로 변환
-    rag_docs = convert_to_rag_documents(df_jobs)  # ← 추가
+    rag_docs = convert_to_rag_documents(df_jobs)  
     # 9. RAG로 변환한 데이터 저장
-    save_rag_documents(rag_docs, RAG_JSON)         # ← 추가
+    save_rag_documents(rag_docs, RAG_JSON)         
     print(f"\n✅ 전처리 완료: 최종 {len(df_jobs)}행, RAG 문서 {len(rag_docs)}개")
