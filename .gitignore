@@ -21,3 +21,9 @@ dist/
 # 운영체제가 자동으로 만드는 파일
 .DS_Store
 Thumbs.db
+
+# Continue local config - may contain API keys
+.continue/config.yaml
+.continue/*.yaml
+.continue/*.json
+
