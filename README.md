@@ -20,37 +20,30 @@
 | 실행 환경 | Docker |
 
 ## 🏗 아키텍처
-             ┌──────────────┐
-             │    사용자     │
-             └──────┬───────┘
-                    │
-                    ▼
-        React + Vite (Frontend)
-                    │
-          POST /analyze 요청
-                    │
-                    ▼
-        FastAPI (Backend API)
-                    │
-        ┌───────────┴───────────┐
-        │                       │
-        ▼                       ▼
-  RAG Service              Gemini API
-        │                  (AI 분석)
-        ▼
-   ChromaDB (Vector DB)
-        ▲
-        │
- RAG Documents (JSON)
-        ▲
-        │
- CSV → Pandas 전처리
-        │
-        ├──────────────► SQLite DB
-        │               (공고 조회)
-        │
-        └──────────────► ChromaDB
-                         (의미 기반 검색)
+```mermaid
+flowchart TD
+    A[사용자]
+    B[React + Vite]
+    C[FastAPI Backend]
+    D[Pandas 전처리]
+    E[SQLite]
+    F[RAG Documents]
+    G[ChromaDB]
+    H[RAG Service]
+    I[Gemini API]
+
+    A --> B
+    B -->|POST /analyze| C
+
+    D --> E
+    D --> F
+    F --> G
+
+    C --> H
+    H --> G
+    H --> I
+    I --> C
+```    
 
 ## 🚀 실행 방법
 
@@ -113,16 +106,15 @@ careerfit-ai/
 ## 📝 개발 과정
 [본인이 가장 어려웠던 부분과 해결 과정 1~2문장]
 
-```
 ---
 ## Demo
+- Live Demo: https://careerfit-ai-m5x7.onrender.com
 
-    - Live Demo: https://careerfit-ai-m5x7.onrender.com
 ---
 ## Developer
-    - Name: WhiJoo Kim
-    - Role: Backend / AI Service Development
-    - GitHub: @whistleK11
-    - Email: wtiger1108@gmail.com
+- Name: WhiJoo Kim
+- Role: Backend / AI Service Development
+- GitHub: @whistleK11
+- Email: wtiger1108@gmail.com
 
 
