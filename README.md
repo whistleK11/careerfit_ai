@@ -86,16 +86,23 @@ python data/preprocess.py
 - Mock Mode: API 한도 초과 시 MOCK_MODE=true 로 폴백 가능
 
 ## 📁 프로젝트 구조
-```
-careerfit-ai/
-├── backend/ # FastAPI 서버
-│ ├── main.py
-│ ├── routers/
-│ ├── services/
-│ ├── data/
-│ └── Dockerfile
-├── frontend/ # React UI
-└── docs/ # 하네스 파일 모음
+```mermaid
+flowchart TD
+    A["📁 careerfit-ai"]
+
+    A --> B["📁 backend"]
+    A --> C["📁 frontend"]
+    A --> D["📁 docs"]
+
+    B --> B1["📄 main.py"]
+    B --> B2["📁 routers"]
+    B --> B3["📁 services"]
+    B --> B4["📁 data"]
+    B --> B5["🐳 Dockerfile"]
+
+    C --> C1["⚛️ React UI"]
+
+    D --> D1["📚 Harness Files"]
 ```
 
 ## 🔮 향후 개선
@@ -104,7 +111,10 @@ careerfit-ai/
 - [ ] RAG 검색 품질 평가 지표 추가 (Ragas 등)
 
 ## 📝 개발 과정
-[본인이 가장 어려웠던 부분과 해결 과정 1~2문장]
+- RAG와 ChromaDB의 동작 원리 이해
+    RAG는 단순히 Gemini를 호출하는 것이 아니라 ChromaDB에서 관련 문서를 검색해 근거와 함께 전달하는 구조입니다. sources와 collection.count(), 검색 결과를 함께 확인하면서 데이터 검색 → 프롬프트 → 응답의 흐름을 단계별로 점검하는 것이 가장 효과적인 해결책입니다.
+- FastAPI·환경설정 및 실행 오류 해결
+    venv, .env, API Key, CORS, 실행 위치 등 환경 설정이 연결되어 있어 작은 설정 하나만 달라도 오류가 발생하기 쉽습니다. 오류가 생기면 실행 명령어 → 오류 메시지 → (venv) 활성화 → .env 및 서버 상태 순서로 확인하면 대부분의 문제를 빠르게 찾을 수 있습니다.
 
 ---
 ## Demo
