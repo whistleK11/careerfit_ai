@@ -27,3 +27,5 @@ config.yaml
 *.yaml
 *.json
 
+#개인 회고록
+RETROSPECTIVE.md
